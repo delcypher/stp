@@ -18,8 +18,9 @@ add_library(stp-lib
     $<TARGET_OBJECTS:abc>
     $<TARGET_OBJECTS:cinterface>
     $<TARGET_OBJECTS:parser>
-    ${Boost_LIBRARIES}
+    #FIXME: NEED A way to add Boost components.
 )
+
 
 message(STATUS Boost ${Boost_LIBRARIES})
 
@@ -33,4 +34,5 @@ add_executable(stp
 set_target_properties(stp PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 target_link_libraries(stp
     stp-lib
+    ${Boost_LIBRARIES}
 )

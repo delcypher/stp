@@ -156,7 +156,7 @@ get_git_head_revision(GIT_REFSPEC GIT_SHA1)
 # Find the Boost package components
 # -----------------------------------------------------------------------------
 
-SET(Boost_USE_STATIC_LIBS ON)
+#SET(Boost_USE_STATIC_LIBS ON)
 find_package( Boost 1.46 REQUIRED COMPONENTS program_options system)
 include_directories(${Boost_INCLUDE_DIRS})
 
