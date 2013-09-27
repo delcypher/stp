@@ -2,7 +2,7 @@ add_subdirectory(cryptominisat2)
 
 include_directories(cryptominisat2/mtl)
 
-add_library(minisat2
+add_library(minisat2 OBJECT
     simp/SimpSolver.cc
     core/Solver.cc
     core_prop/Solver_prop.cc
@@ -10,19 +10,20 @@ add_library(minisat2
     utils/System.cc
 )
 
-add_library(sat
+add_library(sat OBJECT
     CryptoMinisat.cpp
     MinisatCore.cpp
     MinisatCore_prop.cpp
     SimplifyingMinisat.cpp
 )
 
-target_link_libraries(sat
+#yuck
+#target_link_libraries(sat OBJECT
 #     core/lib_release.a
 #     core_prop/lib_release.a
 #     simp/lib_release.a
 #     utils/lib_release.a
-    cryptominisat2
-    minisat2
-)
+#    cryptominisat2
+#    minisat2
+#)
 #add_dependencies(simplifier ASTKind_header)

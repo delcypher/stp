@@ -38,12 +38,14 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/../AST/)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_library(parser
+add_library(parser OBJECT
      ${SOURCES}
 )
-target_link_libraries(parser
-    cppinterface
-)
+
+#target_link_libraries(parser
+#    cppinterface
+#)
+
 foreach(_file ${TOLEX})
     add_dependencies(parser parser_header${_file})
 endforeach()

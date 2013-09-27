@@ -1,5 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../AST/)
-add_library(simplifier
+add_library(simplifier OBJECT
     bvsolver.cpp
     consteval.cpp
     MutableASTNode.cpp

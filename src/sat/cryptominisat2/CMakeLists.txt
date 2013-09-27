@@ -1,7 +1,7 @@
 include_directories(mtl)
 include_directories(MTRand)
 
-add_library(cryptominisat2
+add_library(cryptominisat2 OBJECT
 ClauseAllocator.cpp
 ClauseCleaner.cpp
 FailedVarSearcher.cpp
@@ -23,6 +23,7 @@ XorFinder.cpp
 XorSubsumer.cpp
 )
 
-target_link_libraries(cryptominisat2
-    ${Boost_LIBRARIES}
-)
+#Yuck
+#target_link_libraries(cryptominisat2
+#    ${Boost_LIBRARIES}
+#)

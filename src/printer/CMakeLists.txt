@@ -1,5 +1,5 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../AST/)
-add_library(printer
+add_library(printer OBJECT
     AssortedPrinters.cpp
     BenchPrinter.cpp
     CPrinter.cpp

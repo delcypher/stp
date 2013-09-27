@@ -1,6 +1,6 @@
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../AST/)
 
-add_library(tosat
+add_library(tosat OBJECT
     BitBlaster.cpp
     ToSATBase.cpp
     AIG/BBNodeManagerAIG.cpp
@@ -11,6 +11,9 @@ add_library(tosat
     ASTNode/ToCNF.cpp
     ASTNode/ToSAT.cpp
 )
-target_link_libraries(tosat
-    printer
-)
+
+
+#Yuck
+#target_link_libraries(tosat
+#    printer
+#)
