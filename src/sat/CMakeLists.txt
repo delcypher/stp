@@ -2,6 +2,8 @@ add_subdirectory(cryptominisat2)
 
 include_directories(cryptominisat2/mtl)
 
+include(MergeStaticLibraries)
+
 add_library(minisat2
     simp/SimpSolver.cc
     core/Solver.cc
@@ -17,12 +19,20 @@ add_library(sat
     SimplifyingMinisat.cpp
 )
 
-target_link_libraries(sat
+set(sat_libs cryptominisat2 minisat2)
+set(sat_libs_paths "")
+foreach(lib ${sat_libs})
+    get_property(path_to_lib TARGET ${lib} PROPERTY LOCATION)
+    message(STATUS "Got ${path_to_lib} for lib \"${lib}\" ")
+    list(APPEND sat_libs_paths ${path_to_lib})
+endforeach()
+MERGE_STATIC_LIBRARIES(sat ALL "${sat_libs_paths}")
+#target_link_libraries(sat
 #     core/lib_release.a
 #     core_prop/lib_release.a
 #     simp/lib_release.a
 #     utils/lib_release.a
-    cryptominisat2
-    minisat2
-)
+#    cryptominisat2
+#    minisat2
+#)
 #add_dependencies(simplifier ASTKind_header)
