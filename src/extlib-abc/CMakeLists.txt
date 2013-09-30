@@ -2,7 +2,7 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 #http://www.eecs.berkeley.edu/~alanmi/abc/
 
-add_library(abc OBJECT
+set(abc_files 
     aig/aig/aigCheck.c
     aig/aig/aigDfs.c
     aig/aig/aigFanout.c
@@ -51,5 +51,12 @@ add_library(abc OBJECT
     aig/kit/kitSop.c
     aig/kit/kitTruth.c
 )
+
+# Force compilation with CXX compiler
+set_source_files_properties(${abc_files} 
+                                PROPERTIES LANGUAGE CXX
+                           )
+
+add_library(abc OBJECT ${abc_files})
 
 #add_dependencies(AST ASTKind_header)
