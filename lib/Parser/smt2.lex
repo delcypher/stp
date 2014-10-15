@@ -163,6 +163,7 @@ bv{DIGIT}+	{ smt2lval.str = new std::string(smt2text+2); return BVCONST_DECIMAL_
 "("             { return LPAREN_TOK; }
 ")"             { return RPAREN_TOK; }
 "_"             { return UNDERSCORE_TOK; }
+"!"             { return EXCLAIMATION_MARK_TOK; }
 
  /* Set info types */
  /* This is a very restricted set of the possible keywords */
@@ -172,6 +173,9 @@ bv{DIGIT}+	{ smt2lval.str = new std::string(smt2text+2); return BVCONST_DECIMAL_
 ":smt-lib-version"  { return VERSION_TOK; }
 ":status"        { return STATUS_TOK; }
 ":print-success"        { return PRINT_TOK; }
+
+  /* Attributes */
+":named"        { return NAMED_ATTRIBUTE_TOK; }
 
 
  /* COMMANDS */

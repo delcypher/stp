@@ -118,6 +118,10 @@
 %token LPAREN_TOK
 %token RPAREN_TOK
 
+/* Used for attributed expressions */
+%token EXCLAIMATION_MARK_TOK
+%token NAMED_ATTRIBUTE_TOK
+
  
  /*BV SPECIFIC TOKENS*/
 %token BVLEFTSHIFT_1_TOK
@@ -520,6 +524,16 @@ TRUE_TOK
   $$ = parserInterface->newNode(*$1); 
   parserInterface->deleteNode($1);      
 }
+| LPAREN_TOK EXCLAIMATION_MARK_TOK an_formula NAMED_ATTRIBUTE_TOK STRING_TOK RPAREN_TOK
+{
+  /* This implements (! <an_formula> :named foo) */
+  $$ = $3;
+
+  // Add a binding for this variable name.
+  // HACK: Use the Let manager to do this
+  parserInterface->letMgr->LetExprMgr(*$5,*$3);
+  delete $5;
+}
 | LPAREN_TOK EQ_TOK an_term an_term RPAREN_TOK
 {
   ASTNode * n = parserInterface->newNode(EQ,*$3, *$4);
@@ -758,6 +772,16 @@ TERMID_TOK
 {
   $$ = parserInterface->newNode((*$1));
   parserInterface->deleteNode( $1);
+}
+| LPAREN_TOK EXCLAIMATION_MARK_TOK an_term NAMED_ATTRIBUTE_TOK STRING_TOK RPAREN_TOK
+{
+  /* This implements (! <an_term> :named foo) */
+  $$ = $3;
+
+  // Add a binding for this variable name.
+  // HACK: Use the Let manager to do this
+  parserInterface->letMgr->LetExprMgr(*$5,*$3);
+  delete $5;
 }
 | LPAREN_TOK an_term RPAREN_TOK
 {
